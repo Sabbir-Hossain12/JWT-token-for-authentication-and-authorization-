@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 
+use App\Helper\JWTToken;
 use App\Models\User;
 use Exception;
+use Firebase\JWT\JWT;
 use http\Env\Response;
 use Illuminate\Http\Request;
 
@@ -24,8 +26,37 @@ class userController extends Controller
     }
 
 //    Login
-    function login()
+    function login(Request $request)
     {
+        try {
+
+            $user = User::where('email', '=', $request->input('email'))
+                ->where('password', '=', $request->input('password'))
+                ->count();
+
+            if ($user == 1) {
+
+                $token= JWTToken::createToken($request->input('email'));
+
+                return response()->json([
+                    'status' => 'Success', 'message' => "login successful", "token"=>$token,
+                ])->cookie('token',$token,time()+60*60);
+
+            } else {
+                return response()->json([
+                    'status' => 'Failed', 'message' => "No user found"
+                ]);
+            }
+
+        }
+            catch(Exception $exception)
+           {
+                    return response()->json([
+                        'status' => 'Failed', 'message' => $exception->getMessage()
+                    ]);
+
+
+                 }
 
     }
 }

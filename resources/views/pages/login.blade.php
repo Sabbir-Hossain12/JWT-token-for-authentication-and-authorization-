@@ -24,6 +24,34 @@
     </div>
 
 
+<script>
 
+    async function  Save()
+    {
+        let email= document.getElementById('email').value;
+        let password= document.getElementById('password').value;
+
+
+
+        let obj=
+            {
+                "email": email,
+                "password": password
+            }
+            showLoader();
+         let res= await axios.post("/login",obj);
+            hideLoader();
+
+            if(res.data["status"]==="Failed")
+            {
+                alert(res.data['message']);
+            }
+            else{
+                alert(res.data['message']);
+                window.location.href="/profilePage";
+            }
+
+    }
+</script>
 
 @endsection
