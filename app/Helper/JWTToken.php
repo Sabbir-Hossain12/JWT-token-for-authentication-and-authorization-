@@ -17,7 +17,8 @@ class  JWTToken
             'iss' => 'lara-vel-token',
             'iat' => time(),
             'exp' => time() + 60 * 60,
-            'userEmail' => $email
+            'userEmail' => $email,
+
 
         ];
 

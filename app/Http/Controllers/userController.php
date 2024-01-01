@@ -34,6 +34,7 @@ class userController extends Controller
                 ->where('password', '=', $request->input('password'))
                 ->count();
 
+
             if ($user == 1) {
 
                 $token= JWTToken::createToken($request->input('email'));
@@ -58,5 +59,22 @@ class userController extends Controller
 
                  }
 
+    }
+
+    function profile(Request $request)
+    {
+        $email= $request->header('email');
+
+
+
+            return     $email;
+
+//                User::where('email',$email)->first();
+    }
+
+
+    function logOut()
+    {
+        return redirect('/loginPage')->cookie('token','',time()-60*60);
     }
 }

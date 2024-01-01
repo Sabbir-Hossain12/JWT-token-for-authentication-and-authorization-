@@ -40,13 +40,34 @@
                 </div>
             </div>
             <div class="col-md-2">
-                <a href="" class="btn-success w-100 mt-5 btn btn-sm mx-4">Logout</a>
+                <a href="{{url('/logOut')}}" class="btn-success w-100 mt-5 btn btn-sm mx-4">Logout</a>
             </div>
         </div>
     </div>
 
 
+<script>
 
+
+async function showProfileInfo()
+{
+
+    showLoader();
+    let res= await axios.get("/profile");
+    hideLoader();
+
+
+    document.getElementById('email').value=res.data['email'];
+    document.getElementById('firstName').value=res.data['firstName'];
+    document.getElementById('lastName').value=res.data['lastName'];
+    document.getElementById('mobile').value=res.data['mobile'];
+    document.getElementById('password').value=res.data['password'];
+
+}
+
+
+
+</script>
 
 
 

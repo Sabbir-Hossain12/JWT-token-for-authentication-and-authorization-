@@ -11,7 +11,9 @@ Route::view('/profilePage','pages.profile')->middleware([tokenMiddleware::class]
 
 // backend routes
 Route::post('/registration',[userController::class,'registration']);
- Route::post('/login',[userController::class,'login']);
+Route::post('/login',[userController::class,'login']);
+Route::get('/logOut',[userController::class,'logOut'])->middleware([tokenMiddleware::class]);
+Route::get('/profile',[userController::class,'profile']);
 
 
 
