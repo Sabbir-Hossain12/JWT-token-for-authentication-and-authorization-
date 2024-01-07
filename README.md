@@ -1,5 +1,9 @@
 # how to use jwt token for authentication and authorization in Laravel?
 
+### install PHP-JWT library 
+```php
+composer require firebase/php-jwt
+```
 
 ### .env
 ```
@@ -52,7 +56,7 @@ class  JWTToken
 ### userController.php
 
 ```php
-//when user logins,a token created 
+//when user logins,a token created with the email as parameter
 $token= JWTToken::createToken($request->input('email'));
 
 //token passing as cookie to the client
